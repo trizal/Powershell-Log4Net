@@ -14,9 +14,9 @@ Else {Write-host "Exiting. Log4Net Library cannot be found in folder" $ariesoGeo
 
 # need to modify the Log4Net XML config a bit so that it will dump the logfile into a properly 
 # named file. 
-[xml]$xmlConfigFile = Get-Content $($ariesoBin + "ariesoGEO.log")
+[xml]$xmlConfigFile = Get-Content $($ariesoBin + "log4netSettings.xml")
 $nodeAllLog = $xmlConfigFile.log4net.appender | where {$_.name -eq "AllLogs"}
-$nodeAllLog.file.value = $($ariesoLogFolder + "BulkNetworkLoader.log")
+$nodeAllLog.file.value = $($ariesoLogFolder + "NetworkConfiguration.log")
 $xmlConfigFile.Save($tempConfigFile) 
 $configFile = Get-Item $tempConfigFile
 [log4net.Config.XmlConfigurator]::Configure($configFile)
